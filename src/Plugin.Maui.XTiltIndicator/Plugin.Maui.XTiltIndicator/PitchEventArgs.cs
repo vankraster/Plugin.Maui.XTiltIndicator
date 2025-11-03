@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Plugin.Maui.XTiltIndicator.Internal
+namespace Plugin.Maui.XTiltIndicator
 {
-    internal class PitchEventArgs: EventArgs
+    public class PitchEventArgs: EventArgs
     {
         public double PitchLeft {  get; set; }  
         public double PitchRight {  get; set; }  

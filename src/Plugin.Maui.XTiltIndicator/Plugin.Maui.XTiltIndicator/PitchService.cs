@@ -1,6 +1,6 @@
-﻿namespace Plugin.Maui.XTiltIndicator.Internal
+﻿namespace Plugin.Maui.XTiltIndicator
 {
-    internal class PitchService
+    public class PitchService
     {
         private DateTime _lastUpdate = DateTime.MinValue;
         private const int UpdateIntervalMs = 250;
