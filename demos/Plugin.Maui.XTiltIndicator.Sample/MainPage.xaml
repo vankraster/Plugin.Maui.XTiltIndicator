@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Plugin.Maui.XTiltIndicator.Sample.MainPage"
+             xmlns:xctrls="clr-namespace:Plugin.Maui.XTiltIndicator;assembly=Plugin.Maui.XTiltIndicator" >
+
+    <Grid>
+        <Label Text="Your content" />
+        <xctrls:XPitchIndicator
+             HorizontalOptions="Fill"
+ VerticalOptions="Fill"/>
+    </Grid>
+
+</ContentPage>
