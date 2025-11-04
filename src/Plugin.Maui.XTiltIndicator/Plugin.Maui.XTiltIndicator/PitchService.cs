@@ -72,22 +72,7 @@
                 horizontalPitch = Math.Atan2(-rawX, Math.Sqrt(rawY * rawY + rawZ * rawZ)) * (180.0 / Math.PI);
             else
                 horizontalPitch = Math.Atan2(y, Math.Sqrt(rawX * rawX + rawZ * rawZ)) * (180.0 / Math.PI);
-
-            Color pitchColor = Colors.Lime;
-            // Set color based on deviation
-            if (Math.Abs(horizontalPitch) <= 3)
-            {
-                pitchColor = Color.FromHex("22A191"); // green 
-            }
-            else if (Math.Abs(horizontalPitch) <= 10)
-            {
-                pitchColor = Color.FromHex("E36D01"); // orange 
-            }
-            else
-            {
-                pitchColor = Color.FromHex("D5392D"); // red 
-            }
-
+              
             // === Vertical Pitch ===
             double aMagnitude = Math.Sqrt(x * x + y * y + z * z);
             double pMagnitude = Math.Sqrt(x * x + y * y);
@@ -120,8 +105,7 @@
             {
                 PitchHorizontal = horizontalPitch,
                 PitchLeft = thetaDegrees,
-                PitchRight = -thetaDegrees,
-                PitchHorizontalColor = pitchColor
+                PitchRight = -thetaDegrees, 
             });
         }
 

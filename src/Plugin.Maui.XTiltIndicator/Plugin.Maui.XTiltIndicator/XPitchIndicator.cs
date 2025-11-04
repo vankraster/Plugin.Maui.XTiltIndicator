@@ -10,7 +10,33 @@ namespace Plugin.Maui.XTiltIndicator
         private PitchDrawable _drawable => ((PitchDrawable)_graphicsView.Drawable);
 
         public event Action<string>? TakePictureHandler;
+         
+        #region Bindable Properties
+        public static readonly BindableProperty HorizontalPitchProperty =
+            BindableProperty.Create(nameof(HorizontalPitch), typeof(TPitchType), typeof(TPitchType),
+            TPitchType.Gauge,
+            propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).HorizontalPitch = (TPitchType)n);
 
+        public TPitchType HorizontalPitch
+        {
+            get => (TPitchType)GetValue(HorizontalPitchProperty);
+            set => SetValue(HorizontalPitchProperty, value);
+        }
+
+
+
+        public static readonly BindableProperty VerticalPitchProperty =
+      BindableProperty.Create(nameof(VerticalPitch), typeof(TPitchType), typeof(TPitchType),
+      TPitchType.Gauge,
+      propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).VerticalPitch = (TPitchType)n);
+
+        public TPitchType VerticalPitch
+        {
+            get => (TPitchType)GetValue(VerticalPitchProperty);
+            set => SetValue(VerticalPitchProperty, value);
+        }
+        #endregion
+         
         public XPitchIndicator()
         {
             _graphicsView = new GraphicsView
@@ -39,7 +65,6 @@ namespace Plugin.Maui.XTiltIndicator
 
         private void _pitchService_PitchAngleChangedEvent(object? sender, PitchEventArgs e)
         {
-            _drawable.PitchColor = e.PitchHorizontalColor;
             _drawable.PitchLeft = e.PitchLeft;
             _drawable.PitchRight = e.PitchRight;
             _drawable.Pitch = e.PitchHorizontal;
@@ -57,7 +82,7 @@ namespace Plugin.Maui.XTiltIndicator
             }
 
         }
-         
+
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
@@ -72,6 +97,13 @@ namespace Plugin.Maui.XTiltIndicator
                 _graphicsView.Invalidate();
             }
         }
+          
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
 
+            if (propertyName == nameof(VerticalPitch) || propertyName == nameof(HorizontalPitch))
+                _graphicsView.Invalidate();
+        }
     }
 }
