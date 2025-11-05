@@ -83,12 +83,17 @@ namespace Plugin.Maui.XTiltIndicator
 
         private void _pitchService_PitchAngleChangedEvent(object? sender, PitchEventArgs e)
         {
-            _drawable.PitchLeft = e.PitchLeft;
-            _drawable.PitchRight = e.PitchRight;
-            _drawable.Pitch = e.PitchHorizontal;
+            const double smoothing = 0.15; // 0.1–0.2 e bine
 
-            Invalidate();
+            _drawable.PitchLeft = Lerp(_drawable.PitchLeft, e.PitchLeft, smoothing);
+            _drawable.PitchRight = Lerp(_drawable.PitchRight, e.PitchRight, smoothing);
+            _drawable.Pitch = Lerp(_drawable.Pitch, e.PitchHorizontal, smoothing);
+
+            Invalidate(); // sau InvalidateDrawable(_drawable);
         }
+
+        private static double Lerp(double from, double to, double t)
+            => from + (to - from) * t;
 
         protected override void OnParentSet()
         {
