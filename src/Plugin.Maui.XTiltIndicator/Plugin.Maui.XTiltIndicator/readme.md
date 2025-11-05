@@ -4,6 +4,10 @@
 
 ---
 
+![Overlay Screenshot](https://raw.githubusercontent.com/vankraster/Plugin.Maui.XTiltIndicator/refs/heads/master/demos/images/v1.png)
+
+
+
 ## Features
 
 - Supports **HorizontalPitch** and **VerticalPitch**.
