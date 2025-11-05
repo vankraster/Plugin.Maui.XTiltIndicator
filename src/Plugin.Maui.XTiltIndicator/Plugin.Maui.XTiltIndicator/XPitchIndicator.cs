@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace Plugin.Maui.XTiltIndicator
 {
     public class XPitchIndicator : GraphicsView
-    { 
+    {
         private readonly PitchService _pitchService;
         private PitchDrawable _drawable => ((PitchDrawable)Drawable);
 
@@ -60,10 +60,23 @@ namespace Plugin.Maui.XTiltIndicator
             get => (Color)GetValue(PitchZeroColorProperty);
             set => SetValue(PitchZeroColorProperty, value);
         }
+
+
+
+        public static readonly BindableProperty ShowHorizontalPitchValueProperty =
+              BindableProperty.Create(nameof(ShowHorizontalPitchValue), typeof(bool), typeof(XPitchIndicator),
+              true,
+              propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b).Drawable).ShowHorizontalPitchValue = (bool)n);
+
+        public bool ShowHorizontalPitchValue
+        {
+            get => (bool)GetValue(ShowHorizontalPitchValueProperty);
+            set => SetValue(ShowHorizontalPitchValueProperty, value);
+        }
         #endregion
 
         public XPitchIndicator()
-        { 
+        {
             _pitchService = new PitchService();
             _pitchService.PitchAngleChangedEvent += _pitchService_PitchAngleChangedEvent;
 
@@ -78,7 +91,7 @@ namespace Plugin.Maui.XTiltIndicator
             //};
             //_graphicsView.GestureRecognizers.Add(tapGestureRecognizer);
 
-            Drawable = new PitchDrawable(); 
+            Drawable = new PitchDrawable();
         }
 
         private void _pitchService_PitchAngleChangedEvent(object? sender, PitchEventArgs e)
@@ -125,7 +138,8 @@ namespace Plugin.Maui.XTiltIndicator
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == nameof(VerticalPitch) || propertyName == nameof(HorizontalPitch) || propertyName == nameof(PitchColor))
+            if (propertyName == nameof(VerticalPitch) || propertyName == nameof(HorizontalPitch) || propertyName == nameof(PitchColor)
+                 || propertyName == nameof(ShowHorizontalPitchValue))
                 Invalidate();
         }
     }

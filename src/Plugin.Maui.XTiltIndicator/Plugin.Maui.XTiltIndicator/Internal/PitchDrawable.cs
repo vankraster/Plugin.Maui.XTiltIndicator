@@ -18,6 +18,7 @@ namespace Plugin.Maui.XTiltIndicator.Internal
 
         public Color PitchColor { get; set; } = Colors.Lime;
         public Color PitchZeroColor { get; set; } = Colors.Red;
+        public bool ShowHorizontalPitchValue { get; set; } = true;
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
@@ -121,8 +122,8 @@ namespace Plugin.Maui.XTiltIndicator.Internal
                     float y2 = arcCenterY - outerR * sin;
 
                     canvas.StrokeColor = deg % 10 == 0 ? PitchColor : Colors.Gray.WithAlpha(0.7f);
-                    
-                    if (deg ==0)
+
+                    if (deg == 0)
                         canvas.StrokeColor = PitchZeroColor;
 
                     canvas.StrokeSize = deg % 10 == 0 ? 2f : 1f;
@@ -148,23 +149,26 @@ namespace Plugin.Maui.XTiltIndicator.Internal
                 float ix = arcCenterX + indicatorLen * (float)Math.Cos(pitchRad);
                 float iy = arcCenterY - indicatorLen * (float)Math.Sin(pitchRad);
 
-                canvas.StrokeColor = PitchColor;
+                canvas.StrokeColor = Colors.Gray.WithAlpha(0.7f);
                 canvas.StrokeSize = 3f;
                 canvas.DrawLine(arcCenterX, arcCenterY, ix, iy);
 
                 // === Valoarea numerică Pitch deasupra semicercului ===
-                canvas.FontColor = PitchColor;
-                canvas.FontSize = 16;
-                string pitchText = $"{Pitch:F1}°";
-                canvas.DrawString(
-                    pitchText,
-                    arcCenterX - 30,
-                    arcCenterY - arcRadius - 20,
-                    60,
-                    20,
-                    HorizontalAlignment.Center,
-                    VerticalAlignment.Center
-                );
+                if (ShowHorizontalPitchValue)
+                {
+                    canvas.FontColor = PitchColor;
+                    canvas.FontSize = 16;
+                    string pitchText = $"{Pitch:F1}°";
+                    canvas.DrawString(
+                        pitchText,
+                        arcCenterX - 30,
+                        arcCenterY - arcRadius - 20,
+                        60,
+                        20,
+                        HorizontalAlignment.Center,
+                        VerticalAlignment.Center
+                    );
+                }
 
                 canvas.RestoreState();
             }

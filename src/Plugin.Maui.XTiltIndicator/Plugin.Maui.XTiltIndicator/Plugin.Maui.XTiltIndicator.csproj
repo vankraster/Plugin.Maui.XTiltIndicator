@@ -39,28 +39,31 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-
-
-
+ 
 		<!-- NuGet -->
+		<PackageId>PerformanceDebugOverlay</PackageId>
+		<Version>1.0.0</Version>
+		<Product>Plugin.Maui.XTiltIndicator</Product>
 		<Authors>Radu Bogda Claudiu</Authors>
 		<Copyright>Copyright © Radu Bogdan Claudiu and contributors</Copyright>
 		<IsPackable>True</IsPackable>
 		<PackageProjectUrl>https://github.com/vankraster/Plugin.Maui.XTiltIndicator</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/vankraster/Plugin.Maui.XTiltIndicator</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>dotnet-maui;maui;plugin;</PackageTags>
 		<IncludeSymbols>True</IncludeSymbols>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<Title>.NET MAUI Tilt Indicator</Title>
-		<Description>Plugin.Maui.XTiltIndicator displays tilt indicator horizontal and vertical.</Description>
+		<Description>A .NET MAUI plugin that displays a tilt indicator for both horizontal and vertical axes.</Description>
+		<PackageTags>MAUI;Tilt;Indicator;Pitch;Sensor;GraphicsView</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<DebugType>portable</DebugType>
-		<PackageIcon>icon.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<!--<PackageIcon>icon.png</PackageIcon>-->
+		<RepositoryUrl>https://github.com/vankraster/Plugin.Maui.XTiltIndicator</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<!--<PackageReadmeFile>readme.md</PackageReadmeFile>-->
 	</PropertyGroup>
 
 	<ItemGroup>
