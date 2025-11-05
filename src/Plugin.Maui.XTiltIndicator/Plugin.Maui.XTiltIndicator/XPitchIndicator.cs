@@ -10,10 +10,10 @@ namespace Plugin.Maui.XTiltIndicator
         private PitchDrawable _drawable => ((PitchDrawable)_graphicsView.Drawable);
 
         public event Action<string>? TakePictureHandler;
-         
+
         #region Bindable Properties
         public static readonly BindableProperty HorizontalPitchProperty =
-            BindableProperty.Create(nameof(HorizontalPitch), typeof(TPitchType), typeof(TPitchType),
+            BindableProperty.Create(nameof(HorizontalPitch), typeof(TPitchType), typeof(XPitchIndicator),
             TPitchType.Gauge,
             propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).HorizontalPitch = (TPitchType)n);
 
@@ -26,7 +26,7 @@ namespace Plugin.Maui.XTiltIndicator
 
 
         public static readonly BindableProperty VerticalPitchProperty =
-      BindableProperty.Create(nameof(VerticalPitch), typeof(TPitchType), typeof(TPitchType),
+      BindableProperty.Create(nameof(VerticalPitch), typeof(TPitchType), typeof(XPitchIndicator),
       TPitchType.Gauge,
       propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).VerticalPitch = (TPitchType)n);
 
@@ -35,8 +35,20 @@ namespace Plugin.Maui.XTiltIndicator
             get => (TPitchType)GetValue(VerticalPitchProperty);
             set => SetValue(VerticalPitchProperty, value);
         }
+
+
+        public static readonly BindableProperty PitchColorProperty =
+              BindableProperty.Create(nameof(PitchColor), typeof(Color), typeof(XPitchIndicator),
+              Colors.Lime,
+              propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).PitchColor = (Color)n);
+
+        public Color PitchColor
+        {
+            get => (Color)GetValue(PitchColorProperty);
+            set => SetValue(PitchColorProperty, value);
+        }
         #endregion
-         
+
         public XPitchIndicator()
         {
             _graphicsView = new GraphicsView
@@ -97,12 +109,12 @@ namespace Plugin.Maui.XTiltIndicator
                 _graphicsView.Invalidate();
             }
         }
-          
+
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == nameof(VerticalPitch) || propertyName == nameof(HorizontalPitch))
+            if (propertyName == nameof(VerticalPitch) || propertyName == nameof(HorizontalPitch) || propertyName == nameof(PitchColor))
                 _graphicsView.Invalidate();
         }
     }

@@ -4,11 +4,20 @@
              x:Class="Plugin.Maui.XTiltIndicator.Sample.MainPage"
              xmlns:xctrls="clr-namespace:Plugin.Maui.XTiltIndicator;assembly=Plugin.Maui.XTiltIndicator" >
 
-    <Grid>
-        <Label Text="Your content" />
+    <Grid BackgroundColor="White">
         <xctrls:XPitchIndicator
              HorizontalOptions="Fill"
- VerticalOptions="Fill"/>
+             VerticalOptions="Fill"
+            
+            
+             PitchColor="Red"
+             HorizontalPitch="Gauge"
+             VerticalPitch="Gauge"
+            />
+
+
+
+        <Label Text="Your content" HorizontalOptions="Center" />
     </Grid>
 
 </ContentPage>

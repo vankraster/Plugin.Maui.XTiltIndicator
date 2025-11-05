@@ -63,7 +63,7 @@ namespace Plugin.Maui.XTiltIndicator.Internal
 
                 // left
                 canvas.SaveState();
-                canvas.FillColor = Color.FromArgb("#96239E");
+                canvas.FillColor = PitchColor;
                 //canvas.Translate(width * 0.05f, cy);
                 canvas.Translate(LeftBarX, cy);
                 canvas.Rotate((float)PitchLeft);
@@ -72,7 +72,7 @@ namespace Plugin.Maui.XTiltIndicator.Internal
 
                 // right
                 canvas.SaveState();
-                canvas.FillColor = Color.FromArgb("#96239E");
+                canvas.FillColor = PitchColor;
                 //canvas.Translate(width * 0.95f, cy);
                 canvas.Translate(RightBarX, cy);
                 canvas.Rotate((float)PitchRight);
@@ -119,7 +119,7 @@ namespace Plugin.Maui.XTiltIndicator.Internal
                     float x2 = arcCenterX + outerR * cos;
                     float y2 = arcCenterY - outerR * sin;
 
-                    canvas.StrokeColor = deg % 10 == 0 ? Colors.Lime : Colors.Gray.WithAlpha(0.6f);
+                    canvas.StrokeColor = deg % 10 == 0 ? PitchColor : Colors.Gray.WithAlpha(0.6f);
                     canvas.StrokeSize = deg % 10 == 0 ? 2f : 1f;
                     canvas.DrawLine(x1, y1, x2, y2);
 
@@ -191,7 +191,7 @@ namespace Plugin.Maui.XTiltIndicator.Internal
 
                     float lineLength = isMain ? 25f : 10f;
                     float lineWidth = isMain ? 2f : 1f;
-                    Color lineColor = isMain ? Colors.Lime : Colors.Gray.WithAlpha(0.7f);
+                    Color lineColor = isMain ? PitchColor : Colors.Gray.WithAlpha(0.7f);
 
                     // linie orizontală simplă
                     canvas.StrokeColor = lineColor;
