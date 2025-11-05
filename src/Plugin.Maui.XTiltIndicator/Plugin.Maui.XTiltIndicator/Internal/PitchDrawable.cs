@@ -17,6 +17,7 @@ namespace Plugin.Maui.XTiltIndicator.Internal
         public float RightBarX { get; set; } = 0;
 
         public Color PitchColor { get; set; } = Colors.Lime;
+        public Color PitchZeroColor { get; set; } = Colors.Red;
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
@@ -92,7 +93,7 @@ namespace Plugin.Maui.XTiltIndicator.Internal
                 float arcCenterY = cy; // centrul semicercului chiar pe linia fixă
 
                 // === Arcul semicircular 180° ===
-                canvas.StrokeColor = Colors.Gray.WithAlpha(0.5f);
+                canvas.StrokeColor = Colors.Gray.WithAlpha(0.7f);
                 canvas.StrokeSize = 2f;
                 canvas.DrawArc(
                     arcCenterX - arcRadius,
@@ -119,7 +120,11 @@ namespace Plugin.Maui.XTiltIndicator.Internal
                     float x2 = arcCenterX + outerR * cos;
                     float y2 = arcCenterY - outerR * sin;
 
-                    canvas.StrokeColor = deg % 10 == 0 ? PitchColor : Colors.Gray.WithAlpha(0.6f);
+                    canvas.StrokeColor = deg % 10 == 0 ? PitchColor : Colors.Gray.WithAlpha(0.7f);
+                    
+                    if (deg ==0)
+                        canvas.StrokeColor = PitchZeroColor;
+
                     canvas.StrokeSize = deg % 10 == 0 ? 2f : 1f;
                     canvas.DrawLine(x1, y1, x2, y2);
 
@@ -193,8 +198,13 @@ namespace Plugin.Maui.XTiltIndicator.Internal
                     float lineWidth = isMain ? 2f : 1f;
                     Color lineColor = isMain ? PitchColor : Colors.Gray.WithAlpha(0.7f);
 
+
                     // linie orizontală simplă
                     canvas.StrokeColor = lineColor;
+                    if (v == 0)
+                    {
+                        canvas.StrokeColor = PitchZeroColor;
+                    }
                     canvas.StrokeSize = lineWidth;
                     canvas.DrawLine(x - lineLength, y, x, y);
 

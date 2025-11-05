@@ -47,6 +47,18 @@ namespace Plugin.Maui.XTiltIndicator
             get => (Color)GetValue(PitchColorProperty);
             set => SetValue(PitchColorProperty, value);
         }
+
+
+        public static readonly BindableProperty PitchZeroColorProperty =
+              BindableProperty.Create(nameof(PitchZeroColor), typeof(Color), typeof(XPitchIndicator),
+              Colors.Red,
+              propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).PitchZeroColor = (Color)n);
+
+        public Color PitchZeroColor
+        {
+            get => (Color)GetValue(PitchZeroColorProperty);
+            set => SetValue(PitchZeroColorProperty, value);
+        }
         #endregion
 
         public XPitchIndicator()

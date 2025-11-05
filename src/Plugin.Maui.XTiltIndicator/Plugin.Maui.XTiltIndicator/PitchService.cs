@@ -3,7 +3,7 @@
     public class PitchService
     {
         private DateTime _lastUpdate = DateTime.MinValue;
-        private const int UpdateIntervalMs = 200;
+        private const int UpdateIntervalMs = 16; // ~60 FPS   //33; // ~30 FPS
 
         private double _filteredX, _filteredY, _filteredZ;
         private const double BaseAlpha = 0.1;   // netezire normală
