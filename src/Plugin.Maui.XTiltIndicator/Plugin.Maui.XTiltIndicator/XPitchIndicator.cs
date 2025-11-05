@@ -1,13 +1,14 @@
 ﻿using Plugin.Maui.XTiltIndicator.Internal;
+using Plugin.Maui.XTiltIndicator.Models;
+using Plugin.Maui.XTiltIndicator.Services;
 using System.Runtime.CompilerServices;
 
 namespace Plugin.Maui.XTiltIndicator
 {
-    public class XPitchIndicator : ContentView
-    {
-        private readonly GraphicsView _graphicsView;
+    public class XPitchIndicator : GraphicsView
+    { 
         private readonly PitchService _pitchService;
-        private PitchDrawable _drawable => ((PitchDrawable)_graphicsView.Drawable);
+        private PitchDrawable _drawable => ((PitchDrawable)Drawable);
 
         public event Action<string>? TakePictureHandler;
 
@@ -15,7 +16,7 @@ namespace Plugin.Maui.XTiltIndicator
         public static readonly BindableProperty HorizontalPitchProperty =
             BindableProperty.Create(nameof(HorizontalPitch), typeof(TPitchType), typeof(XPitchIndicator),
             TPitchType.Gauge,
-            propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).HorizontalPitch = (TPitchType)n);
+            propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b).Drawable).HorizontalPitch = (TPitchType)n);
 
         public TPitchType HorizontalPitch
         {
@@ -28,7 +29,7 @@ namespace Plugin.Maui.XTiltIndicator
         public static readonly BindableProperty VerticalPitchProperty =
       BindableProperty.Create(nameof(VerticalPitch), typeof(TPitchType), typeof(XPitchIndicator),
       TPitchType.Gauge,
-      propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).VerticalPitch = (TPitchType)n);
+      propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b).Drawable).VerticalPitch = (TPitchType)n);
 
         public TPitchType VerticalPitch
         {
@@ -40,7 +41,7 @@ namespace Plugin.Maui.XTiltIndicator
         public static readonly BindableProperty PitchColorProperty =
               BindableProperty.Create(nameof(PitchColor), typeof(Color), typeof(XPitchIndicator),
               Colors.Lime,
-              propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).PitchColor = (Color)n);
+              propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b).Drawable).PitchColor = (Color)n);
 
         public Color PitchColor
         {
@@ -52,7 +53,7 @@ namespace Plugin.Maui.XTiltIndicator
         public static readonly BindableProperty PitchZeroColorProperty =
               BindableProperty.Create(nameof(PitchZeroColor), typeof(Color), typeof(XPitchIndicator),
               Colors.Red,
-              propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b)._graphicsView.Drawable).PitchZeroColor = (Color)n);
+              propertyChanged: (b, o, n) => ((PitchDrawable)((XPitchIndicator)b).Drawable).PitchZeroColor = (Color)n);
 
         public Color PitchZeroColor
         {
@@ -62,29 +63,22 @@ namespace Plugin.Maui.XTiltIndicator
         #endregion
 
         public XPitchIndicator()
-        {
-            _graphicsView = new GraphicsView
-            {
-                HorizontalOptions = LayoutOptions.Fill,
-                VerticalOptions = LayoutOptions.Fill,
-            };
+        { 
             _pitchService = new PitchService();
             _pitchService.PitchAngleChangedEvent += _pitchService_PitchAngleChangedEvent;
 
-            TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += async (s, e) =>
-            {
-                var coord = e.GetPosition((View)s);
-                if (coord == null)
-                    return;
+            //TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
+            //tapGestureRecognizer.Tapped += async (s, e) =>
+            //{
+            //    var coord = e.GetPosition((View)s);
+            //    if (coord == null)
+            //        return;
 
-                var drawable = _graphicsView.Drawable as PitchDrawable;
-            };
-            _graphicsView.GestureRecognizers.Add(tapGestureRecognizer);
+            //    var drawable = Drawable as PitchDrawable;
+            //};
+            //_graphicsView.GestureRecognizers.Add(tapGestureRecognizer);
 
-            _graphicsView.Drawable = new PitchDrawable();
-
-            Content = _graphicsView;
+            Drawable = new PitchDrawable(); 
         }
 
         private void _pitchService_PitchAngleChangedEvent(object? sender, PitchEventArgs e)
@@ -93,7 +87,7 @@ namespace Plugin.Maui.XTiltIndicator
             _drawable.PitchRight = e.PitchRight;
             _drawable.Pitch = e.PitchHorizontal;
 
-            _graphicsView.Invalidate();
+            Invalidate();
         }
 
         protected override void OnParentSet()
@@ -118,7 +112,7 @@ namespace Plugin.Maui.XTiltIndicator
                 _drawable.LeftBarX = (float)(padding);
                 _drawable.RightBarX = (float)(width - padding);
 
-                _graphicsView.Invalidate();
+                Invalidate();
             }
         }
 
@@ -127,7 +121,7 @@ namespace Plugin.Maui.XTiltIndicator
             base.OnPropertyChanged(propertyName);
 
             if (propertyName == nameof(VerticalPitch) || propertyName == nameof(HorizontalPitch) || propertyName == nameof(PitchColor))
-                _graphicsView.Invalidate();
+                Invalidate();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Plugin.Maui.XTiltIndicator
+﻿namespace Plugin.Maui.XTiltIndicator.Models
 {
     public class PitchEventArgs: EventArgs
     {

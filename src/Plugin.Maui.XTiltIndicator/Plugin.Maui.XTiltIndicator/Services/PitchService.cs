@@ -1,4 +1,6 @@
-﻿namespace Plugin.Maui.XTiltIndicator
+﻿using Plugin.Maui.XTiltIndicator.Models;
+
+namespace Plugin.Maui.XTiltIndicator.Services
 {
     public class PitchService
     {
