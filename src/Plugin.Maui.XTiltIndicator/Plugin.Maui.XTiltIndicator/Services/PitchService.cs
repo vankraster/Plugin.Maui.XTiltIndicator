@@ -2,7 +2,7 @@
 
 namespace Plugin.Maui.XTiltIndicator.Services
 {
-    public class PitchService
+    public class PitchService : IPitchService
     {
         private DateTime _lastUpdate = DateTime.MinValue;
         private const int UpdateIntervalMs = 16; // ~60 FPS   //33; // ~30 FPS

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Plugin.Maui.XTiltIndicator.Extensions;
 
 namespace Plugin.Maui.XTiltIndicator.Sample
 {
@@ -9,6 +10,7 @@ namespace Plugin.Maui.XTiltIndicator.Sample
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseXTiltIndicator()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

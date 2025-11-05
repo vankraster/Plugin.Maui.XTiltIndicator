@@ -7,7 +7,7 @@ namespace Plugin.Maui.XTiltIndicator
 {
     public class XPitchIndicator : GraphicsView
     {
-        private readonly PitchService _pitchService;
+        private readonly IPitchService _pitchService;
         private PitchDrawable _drawable => ((PitchDrawable)Drawable);
 
         public event Action<string>? TakePictureHandler;
@@ -77,7 +77,7 @@ namespace Plugin.Maui.XTiltIndicator
 
         public XPitchIndicator()
         {
-            _pitchService = new PitchService();
+            _pitchService = Application.Current?.Handler.GetRequiredService<IPitchService>() ?? throw new KeyNotFoundException($"{nameof(PitchService)} not found! Possible not registrated or you must use  .UseXTiltIndicator()  inside MauiProgram.cs > CreateMauiApp()");
             _pitchService.PitchAngleChangedEvent += _pitchService_PitchAngleChangedEvent;
 
             //TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
