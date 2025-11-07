@@ -25,12 +25,22 @@
 Install via NuGet:
 
 ```bash
-dotnet add package Plugin.Maui.XTiltIndicator --version 1.0.0
+dotnet add package Plugin.Maui.XTiltIndicator --version 1.0.1
 ```
 
 ---
 
 ## Configuration
+Add UseXTiltIndicator() inside  MauiProgram >>> MauiApp CreateMauiApp()
+
+```csharp
+     public static MauiApp CreateMauiApp() {
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .UseXTiltIndicator() //<<< This line
+```
+
 
 You can customize the control by setting its bindable properties in XAML or C#.
 
